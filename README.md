@@ -9,6 +9,7 @@ The Chaos module provides functions for:
 - Make Substrate Runtimes behave in ways that they're not supposed to.
 - Explore Runtime edge cases.
 - Explore Extrinsic weights and their economic implications.
+- Expose Runtime Attack Vectors.
 
 ### Terminology
 
@@ -26,7 +27,7 @@ The Chaos module provides implementations for the following traits. If these tra
 ### Dispatchable Functions
 
 - `drag_loop_unit_weight` - Drag block production by calculating hashes in a loop, with constant unitary weight.
-- `drag_loop_damp_weight` - Drag block production by calculating hashes in a loop, with linear damping on weight.
+- `drag_loop_damp_weight` - Drag block production by calculating hashes in a loop, with linear damping on weight. (ToDo)
 
 ![block dragger](blockdragger.png)
 
@@ -34,7 +35,7 @@ The Chaos module provides implementations for the following traits. If these tra
 
 The following examples show how to use the Chaos module in your custom Runtime.
 
-### Examples
+### Pallet Inclusion
 
 Clone [`substrate-node-template`](https://github.com/substrate-developer-hub/substrate-node-template).
 
@@ -115,4 +116,28 @@ index 8c6b839..baa7521 100644
  );
 ```
 
-License: Apache-2.0
+### Dragging Blocks
+
+Start the chain:
+```sh
+$ ./target/release/node-template --dev --tmp
+```
+
+On PolkadotJS, connect to `DEVELOPMENT` Chain (`ws://127.0.0.1:9944`).
+
+Open `Developer`->`Extrinsics`. Choose `chaos`->`dragLoopUnitWeight(n)`.
+
+Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
+
+### Observations
+|       n       | added block time |
+|:-------------:|:----------------:|
+|   1_000_000   |                  |
+|   10_000_000  |                  |
+|   50_000_000  |                  |
+|  100_000_000  |                  |
+|  500_000_000  |                  |
+| 1_000_000_000 |                  |
+
+# License
+Apache-2.0
