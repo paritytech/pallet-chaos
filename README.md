@@ -28,6 +28,8 @@ The Chaos module provides implementations for the following traits. If these tra
 - `drag_loop_unit_weight` - Drag block production by calculating hashes in a loop, with constant unitary weight.
 - `drag_loop_damp_weight` - Drag block production by calculating hashes in a loop, with linear damping on weight.
 
+![block dragger](blockdragger.png)
+
 ## Usage
 
 The following examples show how to use the Chaos module in your custom Runtime.
