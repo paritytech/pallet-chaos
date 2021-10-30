@@ -129,15 +129,47 @@ Open `Developer`->`Extrinsics`. Choose `chaos`->`dragLoopUnitWeight(n)`.
 
 Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
-### Observations
+### Empirical Observations
+
+Empirical observations were collected in a machine with the following specs:
+
+// ToDo
+
+#### dragLoopUnitWeight
+
 |       n       | added block time |
 |:-------------:|:----------------:|
-|   1_000_000   |                  |
-|   10_000_000  |                  |
-|   50_000_000  |                  |
-|  100_000_000  |                  |
-|  500_000_000  |                  |
-| 1_000_000_000 |                  |
+|   1_000_000   |        x         |
+|   5_000_000   |        x         |
+|   10_000_000  |        x         |
+|   50_000_000  |        x         |
+|  100_000_000  |        x         |
+|  500_000_000  |        x         |
+| 1_000_000_000 |        x         |
+
+#### dragLoopDampWeight
+
+|       n       |  wd | added block time |
+|:-------------:|:---:|------------------|
+|   1_000_000   | 0.3 |        x         |
+|   10_000_000  | 0.3 |        x         |
+|   50_000_000  | 0.3 |        x         |
+|  100_000_000  | 0.3 |        x         |
+|  500_000_000  | 0.3 |        x         |
+| 1_000_000_000 | 0.3 |        x         |
+|   1_000_000   | 0.6 |        x         |
+|   10_000_000  | 0.6 |        x         |
+|   50_000_000  | 0.6 |        x         |
+|  100_000_000  | 0.6 |        x         |
+|  500_000_000  | 0.6 |        x         |
+| 1_000_000_000 | 0.6 |        x         |
+|   1_000_000   | 0.9 |        x         |
+|   10_000_000  | 0.9 |        x         |
+|   50_000_000  | 0.9 |        x         |
+|  100_000_000  | 0.9 |        x         |
+|  500_000_000  | 0.9 |        x         |
+| 1_000_000_000 | 0.9 |        x         |
+
 
 # License
 AGPL-3.0
