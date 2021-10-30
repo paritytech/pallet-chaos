@@ -140,4 +140,4 @@ Here's where the experimentation starts. Choose different values for `n`, call `
 | 1_000_000_000 |                  |
 
 # License
-Apache-2.0
+AGPL-3.0
