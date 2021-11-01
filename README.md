@@ -129,7 +129,14 @@ Open `Developer`->`Extrinsics`. Choose `chaos`->`dragLoopUnitWeight(n)`.
 
 Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
-### Empirical Observations
+## Roadmap
+
+- [x] `dragLoopUnitWeight` extrinsic implementation
+- [ ] `dragLoopDampWeight` extrinsic implementation
+- [ ] Block Dragger Trait implementation
+- [ ] Empirical Observations (automated via `subtx` RPC calls)
+
+## Empirical Observations
 
 Empirical observations were collected in a machine with the following specs:
 
@@ -169,7 +176,6 @@ Empirical observations were collected in a machine with the following specs:
 |  100_000_000  | 0.9 |        x         |
 |  500_000_000  | 0.9 |        x         |
 | 1_000_000_000 | 0.9 |        x         |
-
 
 # License
 AGPL-3.0
