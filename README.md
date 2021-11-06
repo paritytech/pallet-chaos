@@ -26,8 +26,8 @@ The Chaos module provides implementations for the following traits. If these tra
 
 ### Dispatchable Functions
 
-- `dragLoopUnitWeight(n)` - Drag block production by calculating hashes in a loop (`n` times), with constant unitary weight.
-- `dragLoopDampWeight(n, wd)` - Drag block production by calculating hashes in a loop (`n` times), with linear damping on weight (`0.0 < wd < 1.0`). (ToDo)
+- `dragBlockUnitWeight(n)` - Drag block production by calculating hashes in a loop (`n` times), with constant unitary weight.
+- `dragBlockDampWeight(n, wd)` - Drag block production by calculating hashes in a loop (`n` times), with linear damping on weight (`0.0 < wd < 1.0`). (ToDo)
 
 ![block dragger](blockdragger.png)
 
@@ -125,14 +125,14 @@ $ ./target/release/node-template --dev --tmp
 
 On PolkadotJS, connect to `DEVELOPMENT` Chain (`ws://127.0.0.1:9944`).
 
-Open `Developer`->`Extrinsics`. Choose `chaos`->`dragLoopUnitWeight(n)`.
+Open `Developer`->`Extrinsics`. Choose `chaos`->`dragBlockUnitWeight(n)`.
 
 Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
 ## Roadmap
 
-- [x] `dragLoopUnitWeight` extrinsic implementation
-- [ ] `dragLoopDampWeight` extrinsic implementation
+- [x] `dragBlockUnitWeight` extrinsic implementation
+- [ ] `dragBlockDampWeight` extrinsic implementation
 - [ ] Block Dragger Trait implementation
 - [ ] Empirical Observations (automated via `subtx` RPC calls)
 
@@ -142,7 +142,7 @@ Empirical observations were collected in a machine with the following specs:
 
 // ToDo
 
-#### dragLoopUnitWeight
+#### dragBlockUnitWeight
 
 |       n       | added block time |
 |:-------------:|:----------------:|
@@ -154,7 +154,7 @@ Empirical observations were collected in a machine with the following specs:
 |  500_000_000  |         x        |
 | 1_000_000_000 |         x        |
 
-#### dragLoopDampWeight
+#### dragBlockDampWeight
 
 |       n       |  wd | added block time |
 |:-------------:|:---:|:----------------:|

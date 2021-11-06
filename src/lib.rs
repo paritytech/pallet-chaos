@@ -67,7 +67,7 @@ pub mod pallet {
 	    // By using the smallest possible weight we are essentially telling
 	    // the runtime that this dispatchable function will be executed immediately
 	    #[pallet::weight(1)]
-	    pub fn drag_loop_unit_weight(origin: OriginFor<T>, n: u32) -> DispatchResult {
+	    pub fn drag_block_unit_weight(origin: OriginFor<T>, n: u32) -> DispatchResult {
 	        let who = ensure_signed(origin)?;
 
 	        let mut j = 0;
