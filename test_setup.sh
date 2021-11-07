@@ -51,6 +51,7 @@ cargo build --release
 
 echo ""
 echo "Let's start the node-chaos executable..."
+echo "From now on, you should turn to [chaoscope](https://github.com/paritytech/chaoscope) for RPC instrumentation."
 ./target/release/node-template --dev --tmp
 
 
