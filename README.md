@@ -20,7 +20,7 @@ The Chaos module provides functions for:
 
 The Chaos module provides implementations for the following traits. If these traits provide the functionality that you need, then you can avoid coupling with the Chaos module.
 
-- `Block Dragger`: Functions for dragging down Block production.
+- `Block Dragger`: Functions for dragging down Block production. (ToDo)
 
 ## Interface
 
@@ -38,7 +38,7 @@ The following commands will set up a local test environment based on:
 - [pallet-chaos](https://github.com/paritytech/pallet-chaos)
 
 ```sh
-$ bash < <(curl -s https://raw.githubusercontent.com/paritytech/pallet-chaos/master/test_setup.sh?token=ACJ7XNCQE6S2RJRVT74H4O3BSCOSO)
+$ bash < <(curl -s https://raw.githubusercontent.com/paritytech/chaoscope/main/test_setup.sh?token=ACJ7XNFYAPPRJISVSDPU43TBSGIPE)
 ```
 
 ### Dragging Blocks
