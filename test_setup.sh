@@ -30,7 +30,7 @@ echo " - [pallet-chaos](https://github.com/paritytech/pallet-chaos)"
 echo ""
 
 rm -rf substrate-node-template
-git clone https://github.com/substrate-developer-hub/substrate-node-template -b v${SUBSTRATE_V}+${SUBSTRATE_TIMESTAMP}
+git clone https://github.com/substrate-developer-hub/substrate-node-template -b v${SUBSTRATE_V}+${SUBSTRATE_TIMESTAMP} substrate-node-chaos
 
 pushd substrate-node-template
 pushd pallets
