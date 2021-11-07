@@ -24,7 +24,8 @@ echo "                             _
                              _
                            ChA0S
                              "
-echo "We're about to break some chains! Our local setup will be based on:"
+echo "⚠️Expect Chaos! ⚠"
+echo "Our local setup will be based on:"
 echo " - [substrate-node-template](https://github.com/substrate-developer-hub/substrate-node-template)"
 echo " - [pallet-chaos](https://github.com/paritytech/pallet-chaos)"
 
