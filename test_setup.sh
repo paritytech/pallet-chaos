@@ -46,11 +46,11 @@ echo "Let's add pallet-chaos to the runtime..."
 git apply pallets/pallet-chaos/diff/add_chaos_runtime.diff
 
 echo ""
-echo "Let's build the node-chaos executable:q:q..."
+echo "Let's build the node-chaos executable..."
 cargo build --release
 
 echo ""
-echo "Let's start the node-chaos executable"
+echo "Let's start the node-chaos executable..."
 ./target/release/node-template --dev --tmp
 
 
