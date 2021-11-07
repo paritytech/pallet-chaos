@@ -1,5 +1,144 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 74f4d1f..dba0e02 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -3501,6 +3501,42 @@ dependencies = [
+  "winapi 0.3.9",
+ ]
+ 
++[[package]]
++name = "node-chaos-runtime"
++version = "3.0.0-monthly-2021-10"
++dependencies = [
++ "frame-benchmarking",
++ "frame-executive",
++ "frame-support",
++ "frame-system",
++ "frame-system-benchmarking",
++ "frame-system-rpc-runtime-api",
++ "hex-literal",
++ "pallet-aura",
++ "pallet-balances",
++ "pallet-chaos",
++ "pallet-grandpa",
++ "pallet-randomness-collective-flip",
++ "pallet-sudo",
++ "pallet-timestamp",
++ "pallet-transaction-payment",
++ "pallet-transaction-payment-rpc-runtime-api",
++ "parity-scale-codec",
++ "scale-info",
++ "sp-api",
++ "sp-block-builder",
++ "sp-consensus-aura",
++ "sp-core",
++ "sp-inherents",
++ "sp-offchain",
++ "sp-runtime",
++ "sp-session",
++ "sp-std",
++ "sp-transaction-pool",
++ "sp-version",
++ "substrate-wasm-builder",
++]
++
+ [[package]]
+ name = "node-template"
+ version = "3.0.0-monthly-2021-10"
+@@ -3508,7 +3544,7 @@ dependencies = [
+  "frame-benchmarking",
+  "frame-benchmarking-cli",
+  "jsonrpc-core",
+- "node-template-runtime",
++ "node-chaos-runtime",
+  "pallet-transaction-payment-rpc",
+  "sc-basic-authorship",
+  "sc-cli",
+@@ -3538,42 +3574,6 @@ dependencies = [
+  "substrate-frame-rpc-system",
+ ]
+ 
+-[[package]]
+-name = "node-template-runtime"
+-version = "3.0.0-monthly-2021-10"
+-dependencies = [
+- "frame-benchmarking",
+- "frame-executive",
+- "frame-support",
+- "frame-system",
+- "frame-system-benchmarking",
+- "frame-system-rpc-runtime-api",
+- "hex-literal",
+- "pallet-aura",
+- "pallet-balances",
+- "pallet-grandpa",
+- "pallet-randomness-collective-flip",
+- "pallet-sudo",
+- "pallet-template",
+- "pallet-timestamp",
+- "pallet-transaction-payment",
+- "pallet-transaction-payment-rpc-runtime-api",
+- "parity-scale-codec",
+- "scale-info",
+- "sp-api",
+- "sp-block-builder",
+- "sp-consensus-aura",
+- "sp-core",
+- "sp-inherents",
+- "sp-offchain",
+- "sp-runtime",
+- "sp-session",
+- "sp-std",
+- "sp-transaction-pool",
+- "sp-version",
+- "substrate-wasm-builder",
+-]
+-
+ [[package]]
+ name = "nodrop"
+ version = "0.1.14"
+@@ -3770,6 +3770,20 @@ dependencies = [
+  "sp-std",
+ ]
+ 
++[[package]]
++name = "pallet-chaos"
++version = "3.0.0-monthly-2021-10"
++dependencies = [
++ "frame-benchmarking",
++ "frame-support",
++ "frame-system",
++ "parity-scale-codec",
++ "scale-info",
++ "sp-core",
++ "sp-io",
++ "sp-runtime",
++]
++
+ [[package]]
+ name = "pallet-grandpa"
+ version = "4.0.0-dev"
+diff --git a/node/Cargo.toml b/node/Cargo.toml
+index 32db84f..fee544e 100644
+--- a/node/Cargo.toml
++++ b/node/Cargo.toml
+@@ -21,7 +21,7 @@ git = 'https://github.com/paritytech/substrate.git'
+ tag = 'monthly-2021-10'
+ version = '3.0.0'
+ 
+-[dependencies.node-template-runtime]
++[dependencies.node-chaos-runtime]
+ path = '../runtime'
+ version = '3.0.0-monthly-2021-10'
+ 
+@@ -169,4 +169,4 @@ version = '4.0.0-dev'
+ 
+ [features]
+ default = []
+-runtime-benchmarks = ['node-template-runtime/runtime-benchmarks']
++runtime-benchmarks = ['node-chaos-runtime/runtime-benchmarks']
 diff --git a/runtime/Cargo.toml b/runtime/Cargo.toml
-index 633facf..bb9f510 100644
+index 633facf..b286422 100644
 --- a/runtime/Cargo.toml
 +++ b/runtime/Cargo.toml
 @@ -1,9 +1,9 @@
@@ -10,7 +149,7 @@ index 633facf..bb9f510 100644
  description = 'A fresh FRAME-based Substrate runtime, ready for hacking.'
  authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
 -homepage = 'https://substrate.dev'
-+homepage = 'https://substrate.dev/'
++homepage = 'https://substrate.io/'
  edition = '2018'
  license = 'Unlicense'
  publish = false
@@ -45,7 +184,7 @@ index 633facf..bb9f510 100644
      'pallet-transaction-payment-rpc-runtime-api/std',
      'pallet-transaction-payment/std',
 diff --git a/runtime/src/lib.rs b/runtime/src/lib.rs
-index ca6e6b1..5123b66 100644
+index ca6e6b1..baa7521 100644
 --- a/runtime/src/lib.rs
 +++ b/runtime/src/lib.rs
 @@ -40,8 +40,8 @@ use pallet_transaction_payment::CurrencyAdapter;
@@ -59,7 +198,7 @@ index ca6e6b1..5123b66 100644
  
  /// An index to a block.
  pub type BlockNumber = u32;
-@@ -87,11 +87,11 @@ pub mod opaque {
+@@ -87,7 +87,7 @@ pub mod opaque {
  }
  
  // To learn more about runtime versioning and what each of the following value means:
@@ -67,13 +206,7 @@ index ca6e6b1..5123b66 100644
 +//   https://docs.substrate.io/v3/runtime/origins#runtime-versioning
  #[sp_version::runtime_version]
  pub const VERSION: RuntimeVersion = RuntimeVersion {
--	spec_name: create_runtime_str!("node-template"),
--	impl_name: create_runtime_str!("node-template"),
-+	spec_name: create_runtime_str!("node-chaos"),
-+	impl_name: create_runtime_str!("node-chaos"),
- 	authoring_version: 1,
- 	// The version of the runtime specification. A full node will not attempt to use its native
- 	//   runtime in substitute for the on-chain Wasm runtime unless all of `spec_name`,
+ 	spec_name: create_runtime_str!("node-template"),
 @@ -272,8 +272,8 @@ impl pallet_sudo::Config for Runtime {
  	type Call = Call;
  }
