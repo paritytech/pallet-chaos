@@ -38,7 +38,7 @@ The following commands will set up a local test environment based on:
 - [pallet-chaos](https://github.com/paritytech/pallet-chaos)
 
 ```sh
-$ bash < <(curl -s https://raw.githubusercontent.com/paritytech/pallet-chaos/master/test_setup.sh?token=ACJ7XNG3S4IEYGHH6ND5R6TBSCOCO)
+$ bash < <(curl -s https://raw.githubusercontent.com/paritytech/pallet-chaos/master/test_setup.sh?token=ACJ7XNCQE6S2RJRVT74H4O3BSCOSO)
 ```
 
 ### Dragging Blocks
