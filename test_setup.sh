@@ -2,7 +2,6 @@
 
 SUBSTRATE_V="3.0.0"
 SUBSTRATE_TIMESTAMP="monthly-2021-10"
-SUBSTRATE_NODE_TEMPLATE_URL="https://github.com/substrate-developer-hub/substrate-node-template/archive/refs/tags/v${SUBSTRATE_V}+${SUBSTRATE_TIMESTAMP}.tar.gz"
 
 echo ""
 echo "   🅂⒰𝕭𝓼ṪᴙȺՇ乇"
