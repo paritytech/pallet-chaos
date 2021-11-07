@@ -1,13 +1,16 @@
 diff --git a/runtime/Cargo.toml b/runtime/Cargo.toml
-index 633facf..1c6abb4 100644
+index 633facf..bb9f510 100644
 --- a/runtime/Cargo.toml
 +++ b/runtime/Cargo.toml
-@@ -3,7 +3,7 @@ name = 'node-template-runtime'
+@@ -1,9 +1,9 @@
+ [package]
+-name = 'node-template-runtime'
++name = 'node-chaos-runtime'
  version = '3.0.0-monthly-2021-10'
  description = 'A fresh FRAME-based Substrate runtime, ready for hacking.'
  authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
 -homepage = 'https://substrate.dev'
-+homepage = 'https://substrate.io/'
++homepage = 'https://substrate.dev/'
  edition = '2018'
  license = 'Unlicense'
  publish = false
@@ -42,7 +45,7 @@ index 633facf..1c6abb4 100644
      'pallet-transaction-payment-rpc-runtime-api/std',
      'pallet-transaction-payment/std',
 diff --git a/runtime/src/lib.rs b/runtime/src/lib.rs
-index ca6e6b1..baa7521 100644
+index ca6e6b1..5123b66 100644
 --- a/runtime/src/lib.rs
 +++ b/runtime/src/lib.rs
 @@ -40,8 +40,8 @@ use pallet_transaction_payment::CurrencyAdapter;
@@ -56,7 +59,7 @@ index ca6e6b1..baa7521 100644
  
  /// An index to a block.
  pub type BlockNumber = u32;
-@@ -87,7 +87,7 @@ pub mod opaque {
+@@ -87,11 +87,11 @@ pub mod opaque {
  }
  
  // To learn more about runtime versioning and what each of the following value means:
@@ -64,7 +67,13 @@ index ca6e6b1..baa7521 100644
 +//   https://docs.substrate.io/v3/runtime/origins#runtime-versioning
  #[sp_version::runtime_version]
  pub const VERSION: RuntimeVersion = RuntimeVersion {
- 	spec_name: create_runtime_str!("node-template"),
+-	spec_name: create_runtime_str!("node-template"),
+-	impl_name: create_runtime_str!("node-template"),
++	spec_name: create_runtime_str!("node-chaos"),
++	impl_name: create_runtime_str!("node-chaos"),
+ 	authoring_version: 1,
+ 	// The version of the runtime specification. A full node will not attempt to use its native
+ 	//   runtime in substitute for the on-chain Wasm runtime unless all of `spec_name`,
 @@ -272,8 +272,8 @@ impl pallet_sudo::Config for Runtime {
  	type Call = Call;
  }
