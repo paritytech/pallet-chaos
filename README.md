@@ -25,19 +25,9 @@ The Chaos module provides functions for:
 
 ![block dragger](blockdragger.png)
 
-## Usage
-
-The following commands will set up a local test environment based on:
-- [substrate-node-template](https://github.com/substrate-developer-hub/substrate-node-template)
-- [pallet-chaos](https://github.com/paritytech/pallet-chaos)
-
-```sh
-$ bash < <(curl -s https://raw.githubusercontent.com/paritytech/chaoscope/main/test_setup.sh?token=ACJ7XNFYAPPRJISVSDPU43TBSGIPE)
-```
-
 ### Dragging Blocks
 
-Start the chain:
+Include `pallet-chaos` to a `substrate-node-template`, build it, and start the chain:
 ```sh
 $ ./target/release/node-template --dev --tmp
 ```
