@@ -13,18 +13,12 @@ The Chaos module provides functions for:
 
 ### Terminology
 
-- **Block Dragger:** an expensive Dispatch call specifically designed to drag down Block production on the Runtime.
+- **Block Dragger:** an expensive extrinsic specifically designed to drag down Block production on the Runtime (`drag_block_*`).
 - **Weight Damper**: a property of Block Draggers. Consists of a floating point multiplier (`0.0 < wd < 1.0`) for Dispatch weights.
-
-### Implementations
-
-The Chaos module provides implementations for the following traits. If these traits provide the functionality that you need, then you can avoid coupling with the Chaos module.
-
-- `Block Dragger`: Functions for dragging down Block production. (ToDo)
 
 ## Interface
 
-### Dispatchable Functions
+## Dispatchable Functions
 
 - `dragBlockUnitWeight(n)` - Drag block production by calculating hashes in a loop (`n` times), with constant unitary weight.
 - `dragBlockDampWeight(n, wd)` - Drag block production by calculating hashes in a loop (`n` times), with linear damping on weight (`0.0 < wd < 1.0`). (ToDo)
@@ -53,13 +47,6 @@ On PolkadotJS, connect to `DEVELOPMENT` Chain (`ws://127.0.0.1:9944`).
 Open `Developer`->`Extrinsics`. Choose `chaos`->`dragBlockUnitWeight(n)`.
 
 Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
-
-## Roadmap
-
-- [x] `dragBlockUnitWeight` extrinsic implementation
-- [ ] `dragBlockDampWeight` extrinsic implementation
-- [ ] Block Dragger Trait implementation
-- [ ] Empirical Observations (automated via [`chaoscope`](https://github.com/paritytech/chaoscope) RPC calls)
 
 # License
 AGPL-3.0
