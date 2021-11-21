@@ -1,20 +1,25 @@
-//! Benchmarking setup for pallet-template
-
 use super::*;
 
 #[allow(unused)]
 use crate::Pallet as Template;
-use frame_benchmarking::{benchmarks, impl_benchmark_test_suite, whitelisted_caller};
+use frame_benchmarking::{account, benchmarks, whitelisted_caller};
 use frame_system::RawOrigin;
 
 benchmarks! {
-	do_something {
-		let s in 0 .. 100;
-		let caller: T::AccountId = whitelisted_caller();
-	}: _(RawOrigin::Signed(caller), s)
+	drag_block_unit_weight {
+		let caller = whitelisted_caller();
+		let n in 1 .. 10_000_000;
+	}: drag_block_unit_weight(RawOrigin::Signed(caller), n.into())
 	verify {
-		assert_eq!(Something::<T>::get(), Some(s));
+		assert_eq!(1, 1)
+	}
+
+	drag_block_constant_weight {
+		let caller = whitelisted_caller();
+		let n in 1 .. 10_000_000;
+		let c in 1 .. 10_000_000;
+	}: drag_block_constant_weight(RawOrigin::Signed(caller), n.into(), c.into())
+	verify {
+		assert_eq!(1, 1)
 	}
 }
-
-impl_benchmark_test_suite!(Template, crate::mock::new_test_ext(), crate::mock::Test);
