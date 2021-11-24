@@ -14,14 +14,13 @@ The Chaos module provides functions for:
 ### Terminology
 
 - **Block Dragger:** an expensive extrinsic specifically designed to drag down Block production on the Runtime (`drag_block_*`).
-- **Weight Damper**: a property of Block Draggers. Consists of a floating point multiplier (`0.0 < wd < 1.0`) for Dispatch weights.
 
 ## Interface
 
 ## Dispatchable Functions
 
-- `dragBlockUnitWeight(n)` - Drag block production by calculating hashes in a loop (`n` times), with constant unitary weight.
-- `dragBlockDampWeight(n, wd)` - Drag block production by calculating hashes in a loop (`n` times), with linear damping on weight (`0.0 < wd < 1.0`). (ToDo)
+- `dragBlockUnitWeight(n)` - Drags block production by calculating hashes in a loop (`n` times), with constant unitary weight.
+- `dragBlockConstantWeight(n, c)` - Drags block production by calculating hashes in a loop (`n` times), with custom constant weight.
 
 ![block dragger](blockdragger.png)
 
