@@ -79,26 +79,5 @@ pub mod pallet {
 			// Return a successful DispatchResultWithPostInfo
 			Ok(())
 		}
-
-		// By using a constant weight we are essentially telling
-		// the runtime that this dispatchable function will be executed at constant time, which is not true
-		#[pallet::weight(*_c as Weight)]
-		pub fn drag_block_constant_weight(origin: OriginFor<T>, n: u64, _c: u64) -> DispatchResult {
-			let who = ensure_signed(origin)?;
-
-			let mut j = 0;
-
-			// stall loop
-			for i in 1..=n {
-				// hash to waste some cpu cycles
-				T::Hashing::hash_of(&j);
-				j = i;
-			}
-
-			Self::deposit_event(Event::Stalled(n, who));
-
-			// Return a successful DispatchResultWithPostInfo
-			Ok(())
-		}
 	}
 }

@@ -7,15 +7,11 @@ use sp_std::marker::PhantomData;
 
 pub trait WeightInfo {
 	fn unit_weight() -> Weight;
-	fn constant_weight(c: u32) -> Weight;
 }
 
 pub struct SubstrateWeight<T>(PhantomData<T>);
 impl<T: frame_system::Config> WeightInfo for SubstrateWeight<T> {
 	fn unit_weight() -> Weight {
 		(1 as Weight)
-	}
-	fn constant_weight(c: u32, ) -> Weight {
-		(c as Weight)
 	}
 }

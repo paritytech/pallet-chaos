@@ -13,13 +13,4 @@ benchmarks! {
 	verify {
 		assert_eq!(1, 1)
 	}
-
-	drag_block_constant_weight {
-		let caller = whitelisted_caller();
-		let n in 1 .. 10_000_000;
-		let c in 1 .. 10_000_000;
-	}: drag_block_constant_weight(RawOrigin::Signed(caller), n.into(), c.into())
-	verify {
-		assert_eq!(1, 1)
-	}
 }

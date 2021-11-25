@@ -20,7 +20,6 @@ The Chaos module provides functions for:
 ## Dispatchable Functions
 
 - `dragBlockUnitWeight(n)` - Drags block production by calculating hashes in a loop (`n` times), with constant unitary weight.
-- `dragBlockConstantWeight(n, c)` - Drags block production by calculating hashes in a loop (`n` times), with custom constant weight.
 
 ![block dragger](blockdragger.png)
 
