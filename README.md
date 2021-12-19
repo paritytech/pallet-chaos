@@ -11,15 +11,11 @@ The Chaos module provides functions for:
 - Explore Extrinsic weights and their economic implications.
 - Expose Runtime Attack Vectors.
 
-### Terminology
-
-- **Block Dragger:** an expensive extrinsic specifically designed to drag down Block production on the Runtime (`drag_block_*`).
-
 ## Interface
 
 ## Dispatchable Functions
 
-- `dragBlockUnitWeight(n)` - Drags block production by calculating hashes in a loop (`n` times), with constant unitary weight.
+- `dragBlockUnitWeight(n)` - Injects a heavy computation payload into the runtime, effectively dragging block production by calculating hashes in a loop (n times), with constant unitary extrinsic weight.
 
 ![block dragger](blockdragger.png)
 
