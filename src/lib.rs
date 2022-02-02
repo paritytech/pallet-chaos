@@ -59,27 +59,6 @@ pub mod pallet {
 	// Dispatchable functions must be annotated with a weight and must return a DispatchResult.
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
-		/// By using the smallest possible weight we are essentially telling
-		/// the runtime that this dispatchable function will be executed immediately
-		#[pallet::weight(1 as Weight)]
-		pub fn drag_block_unit_weight(origin: OriginFor<T>, n: u64) -> DispatchResult {
-			let who = ensure_signed(origin)?;
-
-			let mut j = 0;
-
-			// stall loop
-			for i in 1..=n {
-				// hash to waste some cpu cycles
-				T::Hashing::hash_of(&j);
-				j = i;
-			}
-
-			Self::deposit_event(Event::Stalled(n, who));
-
-			// Return a successful DispatchResultWithPostInfo
-			Ok(())
-		}
-
 		/// Illustrates how unwrap can go bad
 		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
 		pub fn unwrap_add(origin: OriginFor<T>) -> DispatchResult {
@@ -119,6 +98,27 @@ pub mod pallet {
 		pub fn clear_adder(origin: OriginFor<T>) -> DispatchResult {
 			let _who = ensure_signed(origin)?;
 			<Adder<T>>::take();
+			Ok(())
+		}
+
+		/// By using the smallest possible weight we are essentially telling
+		/// the runtime that this dispatchable function will be executed immediately
+		#[pallet::weight(1 as Weight)]
+		pub fn drag_block_unit_weight(origin: OriginFor<T>, n: u64) -> DispatchResult {
+			let who = ensure_signed(origin)?;
+
+			let mut j = 0;
+
+			// stall loop
+			for i in 1..=n {
+				// hash to waste some cpu cycles
+				T::Hashing::hash_of(&j);
+				j = i;
+			}
+
+			Self::deposit_event(Event::Stalled(n, who));
+
+			// Return a successful DispatchResultWithPostInfo
 			Ok(())
 		}
 	}

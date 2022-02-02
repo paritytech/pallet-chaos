@@ -13,14 +13,6 @@ The Chaos module provides functions for:
 
 ## Dispatchable Functions
 
-### `dragBlockUnitWeight(n)`
-
-Injects a heavy computation payload into the runtime, effectively dragging block production by calculating hashes in a loop (n times), with constant unitary extrinsic weight.
-
-This extrinsic illustrates the importance of proper weight design.
-
-![block dragger](blockdragger.png)
-
 ### `unwrap_add`
 
 Inspired by [`unwrap_is_bad` extrinsic implementation from Alex. Popiak's `how-not-to-build-a-pallet`](https://github.com/apopiak/how-not-to-build-a-pallet/blob/c737f27df5fed367c8e53adc20ed18e2846459e1/pallets/template/src/lib.rs#L193), performs an `unwrap` on the `Adder` storage object. If `Adder` is not set, it introduces an unhandled error into the Runtime.
@@ -35,6 +27,14 @@ This extrinsic illustrates the importance of using safe operations such as [`che
 
 Simply clears the `Adder` storage object so that `unwrap_add` can illustrate bad unwraps.
 
+### `dragBlockUnitWeight(n)`
+
+Injects a heavy computation payload into the runtime, effectively dragging block production by calculating hashes in a loop (n times), with constant unitary extrinsic weight.
+
+This extrinsic illustrates the importance of proper weight design.
+
+![block dragger](blockdragger.png)
+
 # Usage
 
 [`chaoscope`](https://github.com/paritytech/chaoscope) provides a CLI utility to automate interaction with `pallet-chaos` on a local setup.
@@ -46,12 +46,6 @@ $ ./target/release/node-template --dev --tmp
 ```
 3. On PolkadotJS, connect to `DEVELOPMENT` Chain (`ws://127.0.0.1:9944`).
 4. Open `Developer`->`Extrinsics`.
-
-## Dragging Blocks
-
-Choose `chaos`->`dragBlockUnitWeight(n)`.
-
-Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
 ## Bad Unwrapping
 
@@ -71,6 +65,13 @@ On the extrinsics tab you had previously open, choose `chaos`->`overflowAdder(n)
 While monitoring `adder()` on the `Chain state` tab, keep adding numbers at will, until you reach `4_294_967_296`.
 
 Observe what happens after you add above this value, and imagine what would be the implications if `Adder` actually represented something meaningful in your chain.
+
+
+## Dragging Blocks
+
+Choose `chaos`->`dragBlockUnitWeight(n)`.
+
+Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
 # License
 AGPL-3.0
