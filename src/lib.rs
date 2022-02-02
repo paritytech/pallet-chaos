@@ -43,7 +43,7 @@ pub mod pallet {
 		/// Event documentation should end with an array that provides descriptive names for event
 		/// parameters. [something, who]
 		Stalled(u64, T::AccountId),
-		AdderStored(u32, T::AccountId),
+		Added(u32, T::AccountId),
 	}
 
 	// Errors inform users that something went wrong.
@@ -51,8 +51,7 @@ pub mod pallet {
 	pub enum Error<T> {
 		/// Error names should be descriptive.
 		NoneValue,
-		/// Errors should have helpful documentation associated with them.
-		StorageOverflow,
+		AdderOverflow,
 	}
 
 	// Dispatchable functions allows users to interact with the pallet and invoke state changes.
@@ -60,8 +59,8 @@ pub mod pallet {
 	// Dispatchable functions must be annotated with a weight and must return a DispatchResult.
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
-		// By using the smallest possible weight we are essentially telling
-		// the runtime that this dispatchable function will be executed immediately
+		/// By using the smallest possible weight we are essentially telling
+		/// the runtime that this dispatchable function will be executed immediately
 		#[pallet::weight(1 as Weight)]
 		pub fn drag_block_unit_weight(origin: OriginFor<T>, n: u64) -> DispatchResult {
 			let who = ensure_signed(origin)?;
@@ -81,6 +80,22 @@ pub mod pallet {
 			Ok(())
 		}
 
+		/// Illustrates how unwrap can go bad
+		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
+		pub fn unwrap_add(origin: OriginFor<T>) -> DispatchResult {
+			let who = ensure_signed(origin)?;
+
+			// if Adder is not set, unwrap fails
+			let prev = Adder::<T>::get().unwrap();
+
+			let val = prev.checked_add(1).ok_or(Error::<T>::AdderOverflow)?;
+			Adder::<T>::put(val);
+
+			Self::deposit_event(Event::Added(val, who));
+			Ok(())
+		}
+
+		/// Illustrates storage integer overflow
 		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
 		pub fn overflow_adder(origin: OriginFor<T>, n: u32) -> DispatchResult {
 			let who = ensure_signed(origin)?;
@@ -95,7 +110,15 @@ pub mod pallet {
 
 			Adder::<T>::put(adder_new);
 
-			Self::deposit_event(Event::AdderStored(adder_new, who));
+			Self::deposit_event(Event::Added(adder_new, who));
+			Ok(())
+		}
+
+		/// Clears the `Adder` storage item.
+		#[pallet::weight(10_000_000 + T::DbWeight::get().writes(1))]
+		pub fn clear_adder(origin: OriginFor<T>) -> DispatchResult {
+			let _who = ensure_signed(origin)?;
+			<Adder<T>>::take();
 			Ok(())
 		}
 	}

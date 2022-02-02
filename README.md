@@ -21,11 +21,19 @@ This extrinsic illustrates the importance of proper weight design.
 
 ![block dragger](blockdragger.png)
 
+### `unwrap_add`
+
+Inspired by [`unwrap_is_bad` extrinsic implementation from Alex. Popiak's `how-not-to-build-a-pallet`](https://github.com/apopiak/how-not-to-build-a-pallet/blob/c737f27df5fed367c8e53adc20ed18e2846459e1/pallets/template/src/lib.rs#L193), performs an `unwrap` on the `Adder` storage object. If `Adder` is not set, it introduces an unhandled error into the Runtime.
+
 ### `overflow_adder`
 
 Inspired by [overflow extrinsic implementation from Alexander Popiak's `how-not-to-build-a-pallet`](https://github.com/apopiak/how-not-to-build-a-pallet/blob/c737f27df5fed367c8e53adc20ed18e2846459e1/pallets/template/src/lib.rs#L165), performs an unchecked sum over the `Adder` storage object. If the result is above `4_294_967_296`, then `Adder` overflows.
 
 This extrinsic illustrates the importance of using safe operations such as [`checked_add`](https://docs.rs/substrate-primitives/1.0.0/substrate_primitives/struct.U256.html#method.checked_add), [`checked_sub`](https://docs.rs/substrate-primitives/1.0.0/substrate_primitives/struct.U256.html#method.checked_sub) and their variants from [`substrate_primitives::U256`](https://docs.rs/substrate-primitives/1.0.0/substrate_primitives/struct.U256.html).
+
+### `clear_adder`
+
+Simply clears the `Adder` storage object so that `unwrap_add` can illustrate bad unwraps.
 
 # Usage
 
@@ -45,12 +53,20 @@ Choose `chaos`->`dragBlockUnitWeight(n)`.
 
 Here's where the experimentation starts. Choose different values for `n`, call `Submit Transaction` and observe the effects on block production.
 
+## Bad Unwrapping
+
+Choose `chaos`->`unwrapAdder()`.
+
+If `Adder` is not set on the Runtime Storage, you should see a red ⚠️ sign.
+
+If `Adder` is already set (`overflowAdder(n)` has been called), you can clear it by calling `chaos`->`clearAdder()` and then trying to call `chaos`->`unwrapAdder()` again.
+
 ## Overflowing
 
 On a browser new tab, open `Developer`->`Chain state`.
 Then choose `chaos`-> `adder()`, and click the `+` sign. This is how you'll monitor the `Adder` storage object.
 
-On the extrinsics tab you had previously open, choose `chaos`->`overflow_adder(n)`.
+On the extrinsics tab you had previously open, choose `chaos`->`overflowAdder(n)`.
 
 While monitoring `adder()` on the `Chain state` tab, keep adding numbers at will, until you reach `4_294_967_296`.
 
