@@ -30,10 +30,10 @@ pub mod pallet {
 	// The pallet's runtime storage items.
 	// https://docs.substrate.io/v3/runtime/storage
 	#[pallet::storage]
-	#[pallet::getter(fn something)]
+	#[pallet::getter(fn adder)]
 	// Learn more about declaring storage items:
 	// https://docs.substrate.io/v3/runtime/storage#declaring-storage-items
-	pub type Something<T> = StorageValue<_, u32>;
+	pub type Adder<T> = StorageValue<_, u32>;
 
 	// Pallets use events to inform users when important changes are made.
 	// https://docs.substrate.io/v3/runtime/events
@@ -43,6 +43,7 @@ pub mod pallet {
 		/// Event documentation should end with an array that provides descriptive names for event
 		/// parameters. [something, who]
 		Stalled(u64, T::AccountId),
+		AdderStored(u32, T::AccountId),
 	}
 
 	// Errors inform users that something went wrong.
@@ -77,6 +78,24 @@ pub mod pallet {
 			Self::deposit_event(Event::Stalled(n, who));
 
 			// Return a successful DispatchResultWithPostInfo
+			Ok(())
+		}
+
+		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
+		pub fn overflow_adder(origin: OriginFor<T>, n: u32) -> DispatchResult {
+			let who = ensure_signed(origin)?;
+
+			let adder = Adder::<T>::get().unwrap_or(0);
+
+			// we're not checking for an overflow here!
+			let adder_new = adder + n;
+
+			// comment below is how we should be doing the addition
+			// let adder_new = prev.checked_add(1).ok_or(Error::<T>::Overflow)?;
+
+			Adder::<T>::put(adder_new);
+
+			Self::deposit_event(Event::AdderStored(adder_new, who));
 			Ok(())
 		}
 	}
