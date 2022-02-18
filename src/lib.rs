@@ -44,6 +44,7 @@ pub mod pallet {
 		/// parameters. [something, who]
 		Stalled(u64, T::AccountId),
 		Added(u32, T::AccountId),
+		Cleared(T::AccountId),
 	}
 
 	// Errors inform users that something went wrong.
@@ -96,8 +97,9 @@ pub mod pallet {
 		/// Clears the `Adder` storage item.
 		#[pallet::weight(10_000_000 + T::DbWeight::get().writes(1))]
 		pub fn clear_adder(origin: OriginFor<T>) -> DispatchResult {
-			let _who = ensure_signed(origin)?;
+			let who = ensure_signed(origin)?;
 			<Adder<T>>::take();
+			Self::deposit_event(Event::Cleared(who));
 			Ok(())
 		}
 
