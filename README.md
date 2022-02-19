@@ -13,10 +13,6 @@ The Chaos module provides functions for:
 
 ## Dispatchable Functions
 
-### `unwrap_add`
-
-Inspired by [`unwrap_is_bad` extrinsic implementation from Alex. Popiak's `how-not-to-build-a-pallet`](https://github.com/apopiak/how-not-to-build-a-pallet/blob/c737f27df5fed367c8e53adc20ed18e2846459e1/pallets/template/src/lib.rs#L193), performs an `unwrap` on the `Adder` storage object. If `Adder` is not set, it introduces an unhandled error into the Runtime.
-
 ### `overflow_adder`
 
 Inspired by [overflow extrinsic implementation from Alexander Popiak's `how-not-to-build-a-pallet`](https://github.com/apopiak/how-not-to-build-a-pallet/blob/c737f27df5fed367c8e53adc20ed18e2846459e1/pallets/template/src/lib.rs#L165), performs an unchecked sum over the `Adder` storage object. If the result is above `4_294_967_296`, then `Adder` overflows.
@@ -47,14 +43,6 @@ $ ./target/release/node-template --dev --tmp
 3. On PolkadotJS, connect to `DEVELOPMENT` Chain (`ws://127.0.0.1:9944`).
 4. Open `Developer`->`Extrinsics`.
 
-## Bad Unwrapping
-
-Choose `chaos`->`unwrapAdder()`.
-
-If `Adder` is not set on the Runtime Storage, you should see a red ⚠️ sign.
-
-If `Adder` is already set (`overflowAdder(n)` has been called), you can clear it by calling `chaos`->`clearAdder()` and then trying to call `chaos`->`unwrapAdder()` again.
-
 ## Overflowing
 
 On a browser new tab, open `Developer`->`Chain state`.
@@ -65,7 +53,6 @@ On the extrinsics tab you had previously open, choose `chaos`->`overflowAdder(n)
 While monitoring `adder()` on the `Chain state` tab, keep adding numbers at will, until you reach `4_294_967_296`.
 
 Observe what happens after you add above this value, and imagine what would be the implications if `Adder` actually represented something meaningful in your chain.
-
 
 ## Dragging Blocks
 

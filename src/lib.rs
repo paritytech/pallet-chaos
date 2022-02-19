@@ -60,21 +60,6 @@ pub mod pallet {
 	// Dispatchable functions must be annotated with a weight and must return a DispatchResult.
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
-		/// Illustrates how unwrap can go bad
-		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
-		pub fn unwrap_add(origin: OriginFor<T>) -> DispatchResult {
-			let who = ensure_signed(origin)?;
-
-			// if Adder is not set, unwrap fails
-			let prev = Adder::<T>::get().unwrap();
-
-			let val = prev.checked_add(1).ok_or(Error::<T>::AdderOverflow)?;
-			Adder::<T>::put(val);
-
-			Self::deposit_event(Event::Added(val, who));
-			Ok(())
-		}
-
 		/// Illustrates storage integer overflow
 		#[pallet::weight(10_000_000 + T::DbWeight::get().reads_writes(1, 1))]
 		pub fn overflow_adder(origin: OriginFor<T>, n: u32) -> DispatchResult {
